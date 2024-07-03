@@ -8,7 +8,9 @@
 	<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; img-src * data:; script-src 'self'">
 	<meta http-equiv="X-Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; img-src * data:; script-src 'self'">
 	<title>Electron Shell</title>
+	<link href="./css/the-new-css-reset.css" rel="stylesheet">
 	<link href="./css/style.css" rel="stylesheet">
+	<link href="./css/forms.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,6 +18,13 @@
 		<h1>Electron Shell</h1>
 		<img src="img/sample.png" alt="Sample Image">
 		<a href="https://www.electronjs.org/">Visit Electron Website</a>
+		<label>
+			<span>Home Folder</span>
+			<div>
+				<input id="home-folder">
+				<button id="set-home-folder" class="button-form" type="button">Browse</button>
+			</div>
+		</label>
 		<footer>
 			<div>Node.js v<span id="node-version">20.9.0</span></div>
 			<div>Chromium v<span id="chrome-version">122.0.6261.156</span></div>

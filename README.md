@@ -9,3 +9,4 @@ Very simple Electron starter template.
 - IPC function to open links in user default browser.
 - `preload.js` to populate tool version information and link browser to main process.
 - `index.html` is a simple full window display using styles including a background image from a different folder.
+- set a home folder using browse for folder dialog, retrieve setting on app startup

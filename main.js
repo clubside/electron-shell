@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron')
 const fs = require('node:fs')
 const path = require('node:path')
 const { popupContextMenu } = require('./modules/contextmenu.js')
@@ -21,7 +21,8 @@ const appOptions = {
 	windowX: undefined,
 	windowY: undefined,
 	windowWidth: undefined,
-	windowHeight: undefined
+	windowHeight: undefined,
+	homeFolder: undefined
 }
 const appConfig = path.join(app.getPath('userData'), 'config.json')
 
@@ -32,6 +33,22 @@ let moveTimeout
 let resizeTimeout
 let windowMaximized = false
 
+async function browseHomeFolder() {
+	const browseFolder = await dialog.showOpenDialog(mainWindow, {
+		title: 'Choose a home folder',
+		properties: ['openDirectory']
+	})
+	console.log(browseFolder)
+	if (!browseFolder.canceled) {
+		const pathNormalized = browseFolder.filePaths[0].replace(/\\/msg, '/')
+		appOptions.homeFolder = pathNormalized
+		await setOptions()
+		return pathNormalized
+	} else {
+		return null
+	}
+}
+
 async function getOptions() {
 	if (fs.existsSync(appConfig)) {
 		const result = fs.readFileSync(appConfig)
@@ -40,6 +57,7 @@ async function getOptions() {
 		appOptions.windowY = options.windowY || undefined
 		appOptions.windowWidth = options.windowWidth || undefined
 		appOptions.windowHeight = options.windowHeight || undefined
+		appOptions.homeFolder = options.homeFolder || undefined
 		console.log(appOptions)
 	}
 }
@@ -144,4 +162,14 @@ app.on('activate', function () {
 ipcMain.handle('action:openUrl', (event, url) => {
 	console.log(`opening external link ${url}`)
 	shell.openExternal(url)
+})
+
+ipcMain.handle('settings:getSettings', () => {
+	return {
+		homeFolder: appOptions.homeFolder
+	}
+})
+
+ipcMain.handle('settings:setHomeFolder', async () => {
+	return await browseHomeFolder()
 })

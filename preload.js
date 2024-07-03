@@ -12,5 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 contextBridge.exposeInMainWorld('electronAPI', {
-	openLink: (url) => ipcRenderer.invoke('action:openUrl', url)
+	openLink: (url) => ipcRenderer.invoke('action:openUrl', url),
+	getSettings: () => ipcRenderer.invoke('settings:getSettings'),
+	setHomeFolder: () => ipcRenderer.invoke('settings:setHomeFolder')
 })

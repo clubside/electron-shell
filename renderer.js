@@ -13,7 +13,22 @@ function captureLinks() {
 	}
 }
 
+async function startup() {
+	const appSettings = await window.electronAPI.getSettings()
+	if (appSettings.homeFolder) {
+		document.getElementById('home-folder').value = appSettings.homeFolder
+	}
+	captureLinks()
+}
+
+document.getElementById('set-home-folder').addEventListener('click', async () => {
+	const homeFolder = await window.electronAPI.setHomeFolder()
+	if (homeFolder) {
+		document.getElementById('home-folder').value = homeFolder
+	}
+})
+
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('DOM loaded')
-	captureLinks()
+	startup()
 })

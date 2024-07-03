@@ -1,0 +1,215 @@
+:root {
+	--input-foreground: black;
+	--input-background: white;
+	--input-border: #8b8a8b;
+	--input-focus: #1200D6;
+	--input-focus-shadow: hsl(245 100% 59% / 60%);
+	--input-readonly-background: #bbb;
+	--input-disabled-background: #eee;
+	--button-standard: #3e68ff;
+	--button-active : #0037fe;
+	--button-focus: #0029be;
+	--button-disabled: #aaa;
+	--form-control-color: rebeccapurple;
+	--form-control-disabled: #959495;
+}
+
+label {
+	display: flex;
+	flex-direction: column;
+}
+
+label.fixed {
+	flex-grow: 0;
+}
+
+label span {
+	font-size: 90%;
+	font-weight: 600;
+	display: block;
+	margin-bottom: 0.5em;
+}
+
+input,
+select,
+textarea {
+	font-size: 16px;
+	font-size: max(16px, 1em);
+	font-family: inherit;
+	padding: 0.25em 0.5em;
+	color: var(--input-foreground);
+	background-color: var(--input-background);
+	border: 2px solid var(--input-border);
+	border-radius: 4px;
+	transition: 220ms all ease-in-out;
+	max-width: 100%;
+}
+
+media-upload,
+star-rating,
+toggle-switch {
+	transition: 220ms all ease-in-out;
+}
+
+input,
+select {
+	line-height: 1;
+	height: 2.25em;
+}
+
+input,
+textarea {
+	cursor: text;
+}
+
+input[readonly],
+textarea[readonly] {
+	border-style: dotted;
+	cursor: default;
+	background-color: var(--input-readonly-background);
+	opacity: 0.75;
+}
+
+input[disabled],
+textarea[disabled] {
+	--input-border: #ccc;
+
+	background-color: var(--input-disabled-background);
+	cursor: default;
+}
+
+textarea {
+	resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+media-upload:focus,
+star-rating:focus,
+toggle-switch:focus {
+	border-color: var(--input-focus);
+	box-shadow: 0 0 0 2px var(--input-focus-shadow);
+	outline: 2px solid transparent;
+}
+
+input[type="date"] {
+	width: 10em;
+}
+
+input[type="datetime-local"] {
+	width: 15em;
+}
+
+input[type="time"] {
+	width: 9em;
+}
+
+input[type="week"] {
+	width: 12em;
+}
+
+input::placeholder,
+textarea::placeholder {
+	opacity: 0.5;
+}
+
+select {
+	display: grid;
+	align-items: center;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20512%22%20fill%3D%22%238b8a8b%22%3E%3Cpath%20d%3D%22M137.4%20374.6c12.5%2012.5%2032.8%2012.5%2045.3%200l128-128c9.2-9.2%2011.9-22.9%206.9-34.9s-16.6-19.8-29.6-19.8L32%20192c-12.9%200-24.6%207.8-29.6%2019.8s-2.2%2025.7%206.9%2034.9l128%20128z%22%2F%3E%3C%2Fsvg%3E');
+	background-repeat: no-repeat;
+	background-position: right .7em top 50%;
+	background-size: .65em auto;
+	padding-right: 2em;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+input[type="checkbox"] {
+	 appearance: none;
+	background-color: ghostwhite;
+	margin: 0;
+	font: inherit;
+	color: currentcolor;
+	width: 1.15em;
+	height: 1.15em;
+	border: 0.15em solid currentcolor;
+	border-radius: 0.15em;
+	transform: translateY(-0.075em);
+	display: grid;
+	place-content: center;
+	cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+	content: "";
+	width: 0.65em;
+	height: 0.65em;
+	clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+	transform: scale(0);
+	transform-origin: bottom left;
+	transition: 120ms transform ease-in-out;
+	box-shadow: inset 1em 1em var(--form-control-color);
+	background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+	transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+	outline: 1px solid currentcolor;
+	outline-offset: 1px;
+}
+
+input[type="checkbox"]:disabled {
+	--form-control-color: var(--form-control-disabled);
+
+	color: var(--form-control-disabled);
+	cursor: default;
+}
+
+button.button-form {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: start;
+	background-color: var(--button-standard);
+	color: #fff;
+	border-radius: 8px;
+	border: 2px solid var(--button-standard);
+	box-shadow: 0 3px 5px rgb(0 0 0 / 18%);
+	padding: 0.25em 0.75em;
+	min-width: 10ch;
+	min-height: 36px;
+	text-align: center;
+	line-height: 1.1;
+	transition: 220ms all ease-in-out;
+	cursor: pointer;
+}
+
+button.button-form:hover,
+button.button-form:active {
+	background-color: var(--button-active);
+}
+
+button.button-form:focus {
+	outline-style: solid;
+	outline-color: transparent;
+	border-color: var(--input-focus);
+	box-shadow: 0 0 0 2px var(--button-focus);
+}
+
+button.button-form:disabled {
+	background-color: var(--button-disabled);
+	border-color: var(--button-disabled);
+	cursor: default;
+}
+
+star-rating {
+	font-size: 1.75em;
+	color: var(--star-rating-stroke);
+	stroke: var(--star-rating-stroke);
+	fill: none;
+}
