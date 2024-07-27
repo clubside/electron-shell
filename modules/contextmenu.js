@@ -10,38 +10,7 @@ const { Menu } = require('electron')
 exports.popupContextMenu = (webContents, params) => {
 	// console.log(params)
 	const conextMenuTemplate = []
-	if (params.mediaType === 'video') {
-		conextMenuTemplate.push({
-			label: 'Set as Thumbnail',
-			click() {
-				webContents.send('capture-frame', 'thumb')
-			}
-		})
-		conextMenuTemplate.push({
-			label: 'Set as Poster',
-			click() {
-				webContents.send('capture-frame', 'poster')
-			}
-		})
-		conextMenuTemplate.push({
-			label: 'Set as Key Art',
-			click() {
-				webContents.send('capture-frame', 'keyart')
-			}
-		})
-		conextMenuTemplate.push({
-			label: 'Set as Fan Art',
-			click() {
-				webContents.send('capture-frame', 'fanart')
-			}
-		})
-		conextMenuTemplate.push({
-			label: 'Set as new Fan Art',
-			click() {
-				webContents.send('capture-frame', 'fanart-new')
-			}
-		})
-	} else if (params.isEditable) {
+	if (params.isEditable) {
 		if (params.misspelledWord) {
 			if (params.dictionarySuggestions.length > 0) {
 				for (const suggestion of params.dictionarySuggestions) {
